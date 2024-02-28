@@ -18,7 +18,8 @@ hierarchical-todo-list-app/
 │   │   ├── test_config.py
 │   │   └── test_routes.py
 │   ├── requirements.txt            # Python dependencies
-│   └── run.py                      # Entry point to run the Flask application
+│   ├── run.py                      # Entry point to run the Flask application
+│   └── venv                        # Environment variables
 │
 ├── frontend/                       # All frontend code
 │   ├── public/                     # Static files
@@ -35,7 +36,6 @@ hierarchical-todo-list-app/
 │   └── package.json                # NPM dependencies and scripts
 │
 ├── .gitignore                      # Files and folders to be ignored by Git
-├── README.md                       # General project documentation
-└── .env                            # Environment variables (optional, for development)
+└── README.md                       # General project documentation
 
 ```
