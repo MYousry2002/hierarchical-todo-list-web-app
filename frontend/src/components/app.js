@@ -1,6 +1,6 @@
 import React from 'react';
 import '../app.css'; // Importing your main CSS file
-import List from './list';
+import List from './List';
 
 function App() {
   return (
