@@ -22,6 +22,10 @@ function App() {
     delete api.defaults.headers.common['Authorization'];
   }, []);
 
+  // authentication form button
+  const promptRegister = () => setShowRegister(true);
+  const promptLogin = () => setShowRegister(false);
+
   return (
     <div className="app">
       {isAuthenticated ? (
@@ -33,13 +37,11 @@ function App() {
       ) : (
         <>
           {showRegister ? (
-            <Register onRegisterSuccess={handleAuthSuccess} />
+            <Register onRegisterSuccess={handleAuthSuccess} onPromptLogin={promptLogin} />
           ) : (
-            <Login onLoginSuccess={handleAuthSuccess} />
+            <Login onLoginSuccess={handleAuthSuccess} onPromptRegister={promptRegister} />
           )}
-          <button onClick={() => setShowRegister(!showRegister)}>
-            {showRegister ? 'Login' : 'Register'}
-          </button>
+
         </>
       )}
     </div>

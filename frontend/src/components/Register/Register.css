@@ -1,0 +1,66 @@
+.register-container {
+    background-color: #003B46; /* Dark teal color */
+    color: #fff;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .register-container h2 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .register-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .register-container input {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+  }
+  
+  .register-container button {
+    background-color: #008C8B;  /* lighter teal for the button */
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .register-container button:hover {
+    background-color: #006770; /* slightly lighter teal for the button when hover*/
+  }
+  
+
+  
+
+/* Add styles for the prompt text and the button */
+.register-prompt {
+    text-align: center;
+    margin-top: 20px; /* Adjust the margin as per your design */
+}
+
+.prompt-button {
+    background: transparent;
+    border: 1px solid #fff; /* Optional: if you want a border */
+    color: #fff;
+    padding: 10px;
+    margin-left: 10px; /* Add a little space between the text and the button */
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 4px; /* Optional: if you want rounded corners */
+    display: inline-block; /* To keep the button inline with the text */
+}
+  
+.prompt-button:hover {
+    background-color: #006770; /* Change color on hover */
+    border-color: #006770; /* Change border color on hover if border is used */
+}
+  

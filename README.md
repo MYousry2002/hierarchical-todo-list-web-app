@@ -30,6 +30,12 @@ hierarchical-todo-list-app/
 │   │   │   │   ├── App.js          # Main app component
 │   │   │   │   ├── App.test.js     # Test file for App component
 │   │   │   │   └── App.css         # Styling for App component
+│   │   │   ├── Register/           # Register component directory
+│   │   │   │   ├── Register.js     # Component for rendering registration form
+│   │   │   │   └── Register.css    # Styling for Register component
+│   │   │   ├── Login/              # Login component directory
+│   │   │   │   ├── Login.js        # Component for rendering login form
+│   │   │   │   └── Login.css       # Styling for Login component
 │   │   │   ├── List/               # List component directory
 │   │   │   │   └── List.js         # Component for rendering a list
 │   │   │   └── Task/               # Task component directory

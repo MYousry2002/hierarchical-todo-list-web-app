@@ -1,8 +1,9 @@
 // src/components/Register/Register.js
 import React, { useState } from 'react';
 import api from '../../services/api';
+import './Register.css';
 
-function Register({ onRegisterSuccess }) {
+function Register({ onRegisterSuccess, onPromptLogin}) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -33,13 +34,19 @@ function Register({ onRegisterSuccess }) {
   };
 
   return (
-    <div>
+    <div className="register-container">
       <h2>Register</h2>
       <form onSubmit={handleRegister}>
         <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
         <button type="submit">Register</button>
       </form>
+      <div className="register-prompt">
+        Already have an account? 
+        <button onClick={onPromptLogin} className="prompt-button">
+          Log in
+        </button>
+      </div>
     </div>
   );
 }

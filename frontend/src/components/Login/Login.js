@@ -1,8 +1,10 @@
 // src/components/Login/Login.js
 import React, { useState } from 'react';
 import api from '../../services/api';
+import './Login.css';
 
-function Login({ onLoginSuccess }) {
+
+function Login({ onLoginSuccess, onPromptRegister }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -18,13 +20,19 @@ function Login({ onLoginSuccess }) {
   };
 
   return (
-    <div>
+    <div className="login-container">
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
         <button type="submit">Login</button>
       </form>
+      <div className="login-prompt">
+        Not registered?  
+        <button onClick={onPromptRegister} className="prompt-button">
+          Create an account
+        </button>
+      </div>
     </div>
   );
 }
