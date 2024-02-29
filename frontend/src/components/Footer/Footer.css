@@ -1,0 +1,11 @@
+.app-footer {
+    background-color: #003B46; /* Darker shade for contrast */
+    padding: 10px 0;
+    text-align: center;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Add more styling as needed */
+  }
+  

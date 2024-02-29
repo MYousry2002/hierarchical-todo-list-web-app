@@ -4,6 +4,8 @@ import api from '../../services/api';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import List from '../List/List';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 import './App.css';
 
 function App() {
@@ -28,9 +30,12 @@ function App() {
 
   return (
     <div className="app">
+
+      {/* App Header */}
+      <Header />
+
       {isAuthenticated ? (
         <>
-          <h1>Todo List</h1>
           <List />
           <button onClick={handleLogout}>Logout</button>
         </>
@@ -44,6 +49,11 @@ function App() {
 
         </>
       )}
+
+    
+    {/* App Footer */}
+    <Footer />
+
     </div>
   );
 }
