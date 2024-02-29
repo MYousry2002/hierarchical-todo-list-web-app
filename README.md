@@ -26,13 +26,19 @@ hierarchical-todo-list-app/
 │   │   └── index.html              # Entry point HTML file
 │   ├── src/                        # React source files
 │   │   ├── components/             # React components
-│   │   │   ├── app.js              # Main app component
-│   │   │   ├── list.js             # Component for rendering a list
-│   │   │   └── task.js             # Component for rendering a task
+│   │   │   ├── App/                # App component directory
+│   │   │   │   ├── App.js          # Main app component
+│   │   │   │   ├── App.test.js     # Test file for App component
+│   │   │   │   └── App.css         # Styling for App component
+│   │   │   ├── List/               # List component directory
+│   │   │   │   └── List.js         # Component for rendering a list
+│   │   │   └── Task/               # Task component directory
+│   │   │       └── Task.js         # Component for rendering a task
 │   │   ├── services/               # Services for API calls
 │   │   │   └── api.js              # Axios instance for API calls
-│   │   ├── app.css                 # Main CSS file
-│   │   └── index.js                # Entry point for React app
+│   │   ├── index.css               # Main CSS file
+│   │   ├── index.js                # Entry point for React app
+│   │   └── reportWebVitals.js      # Performance measuring (optional)
 │   └── package.json                # NPM dependencies and scripts
 │
 ├── .gitignore                      # Files and folders to be ignored by Git

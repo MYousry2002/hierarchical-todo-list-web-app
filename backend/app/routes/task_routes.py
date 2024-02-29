@@ -37,3 +37,18 @@ def get_task(task_id):
         "completed": task.completed,
         "user_id": task.user_id
     }), 200
+
+
+@task_bp.route('/tasks', methods=['GET'])  # Note the 's' in tasks
+@jwt_required()
+def get_tasks():
+    current_user_id = get_jwt_identity()
+    tasks = Task.query.filter_by(user_id=current_user_id).all()
+    tasks_data = [{
+        "id": task.id,
+        "title": task.title,
+        "description": task.description,
+        "completed": task.completed,
+        "user_id": task.user_id
+    } for task in tasks]
+    return jsonify(tasks_data), 200
