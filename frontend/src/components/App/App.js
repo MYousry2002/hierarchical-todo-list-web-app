@@ -3,6 +3,7 @@ import React, { useState, useCallback } from 'react';
 import api from '../../services/api';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
+import Logout from '../Logout/Logout';
 import List from '../List/List';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -28,6 +29,8 @@ function App() {
   const promptRegister = () => setShowRegister(true);
   const promptLogin = () => setShowRegister(false);
 
+
+
   return (
     <div className="app">
 
@@ -36,8 +39,8 @@ function App() {
 
       {isAuthenticated ? (
         <>
+          <Logout onLogout={handleLogout} />
           <List />
-          <button onClick={handleLogout}>Logout</button>
         </>
       ) : (
         <>
