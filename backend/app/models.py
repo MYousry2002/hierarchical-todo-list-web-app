@@ -23,6 +23,13 @@ class List(db.Model):
     def __repr__(self):
         return '<List %r>' % self.title
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            # Add other fields if necessary
+        }
+
 
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -41,3 +48,19 @@ class Task(db.Model):
 
     def __repr__(self):
         return '<Task %r>' % self.title
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "completed": self.completed,
+            "parent_id": self.parent_id,
+            "list_id": self.list_id,
+            "user_id": self.user_id,
+            "created_at": self.created_at.isoformat(),
+            "updated_at": self.updated_at.isoformat(),
+            # Assuming 'subtasks' should also be included in the dictionary
+            "subtasks": [subtask.to_dict() for subtask in self.subtasks]
+            if self.subtasks else []
+        }

@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import Task from '../Task/Task'; // import the task component
-import api from '../../services/api'; // api
+// List.js
+import React from 'react';
+import TaskContainer from '../TaskContainer/TaskContainer';
 
-function List() {
-  const [tasks, setTasks] = useState([]);
-
-  useEffect(() => {
-    api.get('/tasks')
-      .then(response => setTasks(response.data))
-      .catch(error => console.error("There was an error fetching the tasks", error));
-  }, []);
+function List({ list, removeList }) {
+  // Only render if `list` prop is defined
+  if (!list) {
+    return null; // or loading indicator
+  }
 
   return (
-    <div>
-      {tasks.map(task => (
-        <Task key={task.id} task={task} />
-      ))}
+    <div className="list">
+      <h2>{list.title}</h2>
+      {/* TaskContainer will manage tasks for this specific list */}
+      <TaskContainer listId={list.id} />
+      {/* Button to remove this list */}
+      <button onClick={() => removeList(list.id)} className="remove-list-btn">Remove List</button>
     </div>
   );
 }

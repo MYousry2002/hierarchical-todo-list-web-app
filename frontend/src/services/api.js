@@ -1,9 +1,8 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://127.0.0.1:5000'; // Update with the actual backend API URL
-
+// Since we're using the proxy, we don't need to set the base URL here.
+// Axios will automatically prepend the proxy to relative URLs.
 const api = axios.create({
-  baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },

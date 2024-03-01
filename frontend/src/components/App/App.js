@@ -4,7 +4,7 @@ import api from '../../services/api';
 import Login from '../Auth/Login/Login';
 import Register from '../Auth/Register/Register';
 import Logout from '../Auth/Logout/Logout';
-import List from '../List/List';
+import ListContainer from '../ListContainer/ListContainer'; // Import ListContainer
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import './App.css';
@@ -38,19 +38,25 @@ function App() {
       <Header />
 
       {isAuthenticated ? (
+        
         <>
           <Logout onLogout={handleLogout} />
-          <List />
+          <ListContainer /> {/* Render ListContainer here */}
         </>
+
+
       ) : (
+
+
         <>
           {showRegister ? (
             <Register onRegisterSuccess={handleAuthSuccess} onPromptLogin={promptLogin} />
           ) : (
             <Login onLoginSuccess={handleAuthSuccess} onPromptRegister={promptRegister} />
           )}
-
         </>
+
+
       )}
 
     
