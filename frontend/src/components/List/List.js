@@ -6,23 +6,42 @@ import './List.css';
 
 function List({ list, removeList, onDragStart, onDragOver, onDrop, index }) {
 
-  // list description updating
-  const [isEditing, setIsEditing] = useState(false);
-  const [description, setDescription] = useState(list.description);
-
-  // updating list description
-  const saveDescription = () => {
-    setIsEditing(false);
-    // Here you would typically send the updated description to your backend
-    // For example, using the api service you've defined elsewhere in your application
-    api.put(`/listscontainer/lists/${list.id}`, { description })
+  // list title updating
+  const [isEditingTitle, setIsEditingTitle] = useState(false);
+  const [editedTitle, setEditedTitle] = useState(list.title);
+  
+  const saveTitle = (e) => {
+    e.preventDefault();
+    if (!editedTitle.trim()) {
+      // If the new title is empty, reset to the original title and exit editing mode
+      setEditedTitle(list.title);
+      setIsEditingTitle(false);
+      return;
+    }
+    // Call the API to update the list title
+    api.put(`/listscontainer/lists/${list.id}`, { title: editedTitle })
       .then(response => {
-        // Handle the response, e.g., show a success message
+        // Update the title in the UI
+        list.title = editedTitle;
+        setIsEditingTitle(false);
       })
-      .catch(error => {
-        // Handle the error, e.g., show an error message
-        console.error("Error updating list description", error);
-      });
+      .catch(error => console.error("Error updating title", error));
+  };
+
+  // list description updating
+  const [isEditingDescription, setIsEditingDescription] = useState(false);
+  const [editedDescription, setEditedDescription] = useState(list.description || '');;
+
+  const saveDescription = (e) => {
+    e.preventDefault();
+    // Call the API to update the list description
+    api.put(`/listscontainer/lists/${list.id}`, { description: editedDescription })
+      .then(response => {
+        // Update the description in the UI
+        list.description = editedDescription;
+        setIsEditingDescription(false);
+      })
+      .catch(error => console.error("Error updating description", error));
   };
 
   // collapsing the list
@@ -55,20 +74,32 @@ function List({ list, removeList, onDragStart, onDragOver, onDrop, index }) {
       </button>
 
       <div className="list-header">
-        <h2>{list.title}</h2>
 
-        {/* List Description that allows editing */}
-        {isEditing ? (
+        {/* Editable list title */}
+        {isEditingTitle ? (
+          <input
+            value={editedTitle}
+            onChange={(e) => setEditedTitle(e.target.value)}
+            onBlur={saveTitle}
+            onKeyPress={(e) => e.key === 'Enter' && saveTitle(e)}
+          />
+        ) : (
+          <h2 onDoubleClick={() => setIsEditingTitle(true)}>{list.title}</h2>
+        )}
+
+
+        {/* Editable list description */}
+        {isEditingDescription ? (
           <textarea
             className="list-description-edit"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            value={editedDescription}
+            onChange={(e) => setEditedDescription(e.target.value)}
             onBlur={saveDescription}
           />
         ) : (
           <p className="list-description-view"
-            onClick={() => setIsEditing(true)}>
-            {description || 'Click to add description...'} {/* Provide a placeholder if description is empty */}
+            onClick={() => setIsEditingDescription(true)}>
+            {list.description || 'Click to add description...'} {/* Provide a placeholder if description is empty */}
             </p>
         )}
       </div>
