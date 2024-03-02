@@ -8,6 +8,7 @@ import './ListContainer.css';
 function ListContainer() {
   const [lists, setLists] = useState([]);
   const [newListTitle, setNewListTitle] = useState('');
+  const [draggedIndex, setDraggedIndex] = useState(null); // for dragging and dropping
 
   useEffect(() => {
     // Fetch all lists for the user when the component mounts
@@ -47,10 +48,38 @@ function ListContainer() {
       .catch(error => console.error("Error removing list", error));
   };
 
+
+  // drag and drop lists to move them around
+
+  const onDragStart = (e, index) => {
+    setDraggedIndex(index);
+    // You may want to set some data on the drag event here with e.dataTransfer.setData
+  };
+
+  const onDragOver = (e) => {
+    e.preventDefault(); // This is necessary to allow dropping
+  };
+
+  const onDrop = (index) => {
+    if (draggedIndex === null) return;
+
+    const newListOrder = [...lists];
+    const [removed] = newListOrder.splice(draggedIndex, 1);
+    newListOrder.splice(index, 0, removed);
+    setLists(newListOrder);
+    setDraggedIndex(null);
+  };
+
+
   return (
     <div className="list-container">
-      {lists.map(list => (
-        <List key={list.id} list={list} removeList={() => removeList(list.id)} />
+      {lists.map((list, index) => (
+        <List key={list.id} list={list} removeList={() => removeList(list.id)}
+        onDragStart={onDragStart}
+        onDragOver={onDragOver}
+        onDrop={onDrop}
+        index={index}
+        />
       ))}
 
       <div class="add-list-container">
@@ -69,7 +98,7 @@ function ListContainer() {
           Add List
         </button>
       </div>
-      
+
     </div>
   );
 }

@@ -3,12 +3,17 @@ import React, { useState } from 'react';
 import TaskContainer from '../TaskContainer/TaskContainer';
 import './List.css';
 
-function List({ list, removeList }) {
+function List({ list, removeList, onDragStart, onDragOver, onDrop, index }) {
 
+  // collapsing the list
   const [isCollapsed, setIsCollapsed] = useState(false);
-
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
+  };
+
+  // dragging and moving the list
+  const dragStart = (e) => {
+    onDragStart(e, index);
   };
 
 
@@ -18,8 +23,12 @@ function List({ list, removeList }) {
   }
 
   return (
-    <div className={`list ${isCollapsed ? 'collapsed collapsed-content' : ''}`}>
-      
+    <div className={`list ${isCollapsed ? 'collapsed collapsed-content' : ''}`}
+    draggable
+    onDragStart={dragStart}
+    onDragOver={onDragOver}
+    onDrop={() => onDrop(index)}>
+
       {/* Button to toggle list collapse */}
       <button onClick={toggleCollapse} className="collapse-toggle-btn">
         {isCollapsed ? '>' : '<'} {/* Change icon based on state */}
