@@ -45,9 +45,22 @@
   .collapse-toggle-btn {
     position: absolute;
     top: 10px;
-    left: 10px; /* Position the button to the top right corner of the list */
+    left: -21px; /* Position the button to the top right corner of the list */
     transform: translateX(100%); /* Move it all the way to the right of the list's border */
     z-index: 2; /* Ensure it's above the list content */
-    /* Style the button as you see fit */
+    /* Style the button */
+    background-color: #008C8B; /* Lighter teal for the button */
+    color: #fff; /* White text color */
+    padding: 10px 10px; /* Padding around the text */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+  }
+ 
+  .collapsed-content {
+    /* Hide all children except for the collapse button */
+    > :not(.collapse-toggle-btn) {
+      display: none;
+    }
   }
   

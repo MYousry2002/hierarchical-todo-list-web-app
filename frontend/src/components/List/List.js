@@ -18,7 +18,7 @@ function List({ list, removeList }) {
   }
 
   return (
-    <div className={`list ${isCollapsed ? 'collapsed' : ''}`}>
+    <div className={`list ${isCollapsed ? 'collapsed collapsed-content' : ''}`}>
       
       {/* Button to toggle list collapse */}
       <button onClick={toggleCollapse} className="collapse-toggle-btn">
