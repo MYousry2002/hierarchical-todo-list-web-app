@@ -4,17 +4,17 @@
     flex-grow: 1; /* Takes up all available space */
     flex-wrap: wrap;
     flex-direction: row;
-    align-items: center; /* Center lists horizontally */
+    flex-wrap: nowrap; /* Prevent wrapping of items */
     overflow-x: auto; /* Allows horizontal scrolling if lists exceed container width */
-    overflow-y: auto; /* Adds scroll if content is taller than available space */
     height: 100%;
-    width: 100%;
-    gap: 20px;
-    justify-content: center;
+    max-width: 100%;
+    gap: 20px; /* Space between lists */
+    justify-content: flex-start; /* Align to the start of the main axis */
+    align-items: center; /* Center items on the cross axis */
     padding: 20px;
     max-height: calc(100vh - 80px); /* Full height minus header and footer */
     margin-top: 70px; /* Adjust based on header's height */
-    margin-bottom: 10px;
+    margin-bottom: 10px; /* Adjust based on footer's height */
   }
   
   .add-list-input {

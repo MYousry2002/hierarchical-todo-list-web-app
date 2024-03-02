@@ -20,15 +20,13 @@ body {
 }
 
 #root, .app {
-  height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  min-height: 100vh; /* Use viewport height to ensure it covers the full height of the screen */
+  justify-content: flex-start; /* Align to the start of the main axis */
+  align-items: center; /* Center items on the cross axis */
+  height: 100vh; /* Use viewport height to ensure it covers the full height of the screen */
   width: 100%;
   text-align: center;
-  padding-top: 0px; /* Adjust this value to the height of the header */
 }
 
 

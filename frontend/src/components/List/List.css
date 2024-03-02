@@ -15,6 +15,7 @@
     justify-content: space-between; /* Distributes children with space between */
     overflow: hidden; /* Hide overflow content */
     transition: width 0.3s ease-out; /* Smooth transition for width property */
+    flex-shrink: 0;
   }
   
   .list h2 {
