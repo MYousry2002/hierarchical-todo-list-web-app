@@ -56,6 +56,17 @@
       display: none;
     }
   }
+
+  .list.collapsed h2 {
+    writing-mode: vertical-lr; /* Orient the text vertically */
+    transform-origin: center; /* Ensure the rotation pivots around the center */
+    margin: 0; /* Center the title */
+    height: 100%; /* Full height to align vertically */
+    display: flex; /* Use flexbox to align */
+    align-items: center; /* Align text in the center */
+    justify-content: center; /* Center the text */
+}
+
   
   .collapse-toggle-btn {
     position: absolute;
@@ -76,3 +87,27 @@
     background-color: #006770; /* Lighter color on hover */
   }
 
+
+/* Define a keyframes animation for the hover effect */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    color: #fff;
+  }
+  50% {
+    transform: scale(1.1);
+    color: #D4AA3A; /* Color change for fun */
+  }
+  100% {
+    transform: scale(1);
+    color: #fff;
+  }
+}
+
+/* Apply the animation to the title on hover */
+.list.collapsed h2:hover {
+  animation: pulse 1s ease-in-out infinite;
+}
+.list h2:hover {
+  animation: pulse 1s ease-in-out infinite;
+}
