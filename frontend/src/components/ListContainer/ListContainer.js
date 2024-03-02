@@ -93,7 +93,7 @@ function ListContainer() {
         />
       ))}
 
-      <div class="add-list-container">
+      <div className="add-list-container">
         <input
           className="add-list-input" // Apply the class for styling
           type="text"
