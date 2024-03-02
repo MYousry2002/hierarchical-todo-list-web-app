@@ -1,17 +1,30 @@
 // List.js
-import React from 'react';
+import React, { useState } from 'react';
 import TaskContainer from '../TaskContainer/TaskContainer';
 import './List.css';
 
 function List({ list, removeList }) {
+
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
+  const toggleCollapse = () => {
+    setIsCollapsed(!isCollapsed);
+  };
+
+
   // Only render if `list` prop is defined
   if (!list) {
     return null; // or loading indicator
   }
 
   return (
-    <div className="list">
+    <div className={`list ${isCollapsed ? 'collapsed' : ''}`}>
       
+      {/* Button to toggle list collapse */}
+      <button onClick={toggleCollapse} className="collapse-toggle-btn">
+        {isCollapsed ? '>' : '<'} {/* Change icon based on state */}
+      </button>
+
       <h2>{list.title}</h2>
 
       {/* TaskContainer will manage tasks for this specific list */}

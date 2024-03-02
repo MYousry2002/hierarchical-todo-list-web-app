@@ -1,15 +1,24 @@
 /* List.css */
 .list {
+    position: relative; /* Needed to position the collapse button absolutely */
     background-color: #003B46; /* Dark teal color */
     color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 300px; /* Fixed width for each list */
+    width: 700px; /* Fixed width for each list */
+    min-height: 700px; /* Adjust the minimum height as needed */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distributes children with space between */
+
+    overflow: hidden; /* Hide overflow content */
+    transition: width 0.3s ease-out; /* Smooth transition for width property */
   }
   
   .list h2 {
     margin-bottom: 20px;
+    margin-top: 20px;
     text-align: center;
   }
   
@@ -26,5 +35,19 @@
   
   .remove-list-btn:hover {
     background-color: #9B2C2C; /* Darker red for the button when hover */
+  }
+
+  .collapsed {
+    width: 40px; /* Set a width that will only show the collapse/expand button */
+    /* Adjust padding and other properties as needed to fit the button */
+  }
+  
+  .collapse-toggle-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px; /* Position the button to the top right corner of the list */
+    transform: translateX(100%); /* Move it all the way to the right of the list's border */
+    z-index: 2; /* Ensure it's above the list content */
+    /* Style the button as you see fit */
   }
   
