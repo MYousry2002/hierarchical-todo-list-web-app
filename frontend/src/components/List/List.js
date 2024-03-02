@@ -1,6 +1,7 @@
 // List.js
 import React from 'react';
 import TaskContainer from '../TaskContainer/TaskContainer';
+import './List.css';
 
 function List({ list, removeList }) {
   // Only render if `list` prop is defined
@@ -10,11 +11,17 @@ function List({ list, removeList }) {
 
   return (
     <div className="list">
+      
       <h2>{list.title}</h2>
+
       {/* TaskContainer will manage tasks for this specific list */}
       <TaskContainer listId={list.id} />
+
       {/* Button to remove this list */}
-      <button onClick={() => removeList(list.id)} className="remove-list-btn">Remove List</button>
+      <button onClick={() => removeList(list.id)} className="remove-list-btn">
+        Remove List
+        </button>
+
     </div>
   );
 }

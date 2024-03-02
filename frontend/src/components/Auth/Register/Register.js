@@ -39,7 +39,7 @@ function Register({ onRegisterSuccess, onPromptLogin}) {
       <form onSubmit={handleRegister}>
         <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-        <button type="submit">Register</button>
+        <button type="submit" disabled={!username.trim() || !password.trim()}>Register</button>
       </form>
       <div className="register-prompt">
         Already have an account? 

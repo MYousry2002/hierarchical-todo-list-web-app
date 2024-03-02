@@ -1,0 +1,37 @@
+/* Task.css */
+.task {
+    background-color: #005960; /* Slightly darker teal color */
+    color: #fff;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 4px;
+  }
+  
+  .task.completed {
+    background-color: #3B9778; /* Different color to indicate completion */
+    text-decoration: line-through;
+  }
+  
+  .task h3 {
+    cursor: pointer; /* If you want the title to toggle completion */
+  }
+  
+  .edit-task-btn, .delete-task-btn {
+    background-color: #008C8B; /* Lighter teal for buttons */
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .delete-task-btn {
+    background-color: #C44D58; /* Red color for delete button */
+  }
+  
+  .edit-task-btn:hover,
+  .delete-task-btn:hover {
+    opacity: 0.8;
+  }
+  

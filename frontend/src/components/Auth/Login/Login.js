@@ -25,7 +25,11 @@ function Login({ onLoginSuccess, onPromptRegister }) {
       <form onSubmit={handleLogin}>
         <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-        <button type="submit">Login</button>
+        
+        <button type="submit" disabled={!username.trim() || !password.trim()}>
+          Login
+        </button>
+
       </form>
       <div className="login-prompt">
         Not registered?  

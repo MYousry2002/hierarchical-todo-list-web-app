@@ -1,0 +1,30 @@
+/* List.css */
+.list {
+    background-color: #003B46; /* Dark teal color */
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Fixed width for each list */
+  }
+  
+  .list h2 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .remove-list-btn {
+    background-color: #C44D58; /* Red color for delete button */
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .remove-list-btn:hover {
+    background-color: #9B2C2C; /* Darker red for the button when hover */
+  }
+  

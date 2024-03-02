@@ -38,7 +38,10 @@
     background-color: #006770; /* slightly lighter teal for the button when hover*/
   }
   
-
+  .register-container button:disabled {
+    background-color: #ccc; /* Grey out the button when disabled */
+    cursor: not-allowed;
+  }
   
 
 /* Add styles for the prompt text and the button */

@@ -1,6 +1,7 @@
 // Task.js
 import React, { useState } from 'react';
-import api from '../../services/api'; 
+import api from '../../services/api';
+import './Task.css';
 
 function Task({ task, onTaskUpdate, onTaskDelete }) {
   const [isEditing, setIsEditing] = useState(false);

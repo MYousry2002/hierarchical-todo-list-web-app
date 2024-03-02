@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import List from '../List/List';
+import './ListContainer.css';
 
 
 function ListContainer() {
@@ -47,18 +48,25 @@ function ListContainer() {
   };
 
   return (
-    <div>
+    <div className="list-container">
       {lists.map(list => (
         <List key={list.id} list={list} removeList={() => removeList(list.id)} />
       ))}
       <div>
         <input
+          className="add-list-input" // Apply the class for styling
           type="text"
           value={newListTitle}
           onChange={(e) => setNewListTitle(e.target.value)}
           placeholder="Enter list title"
         />
-        <button onClick={addList}>Add List</button>
+        <button
+          className="add-list-btn" // Apply the class for styling
+          onClick={addList}
+          disabled={!newListTitle.trim()} // Disable button if title input is empty
+        >
+          Add List
+        </button>
       </div>
     </div>
   );
