@@ -1,9 +1,29 @@
 // List.js
 import React, { useState } from 'react';
 import TaskContainer from '../TaskContainer/TaskContainer';
+import api from '../../services/api';
 import './List.css';
 
 function List({ list, removeList, onDragStart, onDragOver, onDrop, index }) {
+
+  // list description updating
+  const [isEditing, setIsEditing] = useState(false);
+  const [description, setDescription] = useState(list.description);
+
+  // updating list description
+  const saveDescription = () => {
+    setIsEditing(false);
+    // Here you would typically send the updated description to your backend
+    // For example, using the api service you've defined elsewhere in your application
+    api.put(`/listscontainer/lists/${list.id}`, { description })
+      .then(response => {
+        // Handle the response, e.g., show a success message
+      })
+      .catch(error => {
+        // Handle the error, e.g., show an error message
+        console.error("Error updating list description", error);
+      });
+  };
 
   // collapsing the list
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -34,7 +54,25 @@ function List({ list, removeList, onDragStart, onDragOver, onDrop, index }) {
         {isCollapsed ? '>' : '<'} {/* Change icon based on state */}
       </button>
 
-      <h2>{list.title}</h2>
+      <div className="list-header">
+        <h2>{list.title}</h2>
+
+        {/* List Description that allows editing */}
+        {isEditing ? (
+          <textarea
+            className="list-description-edit"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            onBlur={saveDescription}
+          />
+        ) : (
+          <p className="list-description-view"
+            onClick={() => setIsEditing(true)}>
+            {description || 'Click to add description...'} {/* Provide a placeholder if description is empty */}
+            </p>
+        )}
+      </div>
+
 
       {/* TaskContainer will manage tasks for this specific list */}
       <TaskContainer listId={list.id} />

@@ -16,6 +16,7 @@ class User(db.Model):
 class List(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(200))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     tasks = db.relationship(
         'Task', backref='list', lazy=True, cascade="all, delete-orphan")
@@ -27,6 +28,7 @@ class List(db.Model):
         return {
             "id": self.id,
             "title": self.title,
+            "description": self.description,
             # Add other fields if necessary
         }
 

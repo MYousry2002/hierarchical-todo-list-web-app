@@ -8,6 +8,7 @@ import './ListContainer.css';
 function ListContainer() {
   const [lists, setLists] = useState([]);
   const [newListTitle, setNewListTitle] = useState('');
+  const [newListDescription, setNewListDescription] = useState(''); // for list description
   const [draggedIndex, setDraggedIndex] = useState(null); // for dragging and dropping
 
   useEffect(() => {
@@ -31,10 +32,17 @@ function ListContainer() {
     // Prevent adding empty title lists
     if (!newListTitle.trim()) return;
 
-    api.post('listscontainer/lists', { title: newListTitle })
+    const newListData = {
+      title: newListTitle,
+      description: newListDescription, // Include description in the payload
+    };
+
+
+    api.post('listscontainer/lists', newListData)
       .then(response => {
         setLists(prevLists => [...prevLists, response.data]);
         setNewListTitle(''); // Clear the input field after adding
+        setNewListDescription(''); // Clear the description field after adding
       })
       .catch(error => console.error("Error adding list", error));
   };
@@ -74,7 +82,10 @@ function ListContainer() {
   return (
     <div className="list-container">
       {lists.map((list, index) => (
-        <List key={list.id} list={list} removeList={() => removeList(list.id)}
+        <List
+        key={list.id}
+        list={list}
+        removeList={() => removeList(list.id)}
         onDragStart={onDragStart}
         onDragOver={onDragOver}
         onDrop={onDrop}
@@ -90,6 +101,14 @@ function ListContainer() {
           onChange={(e) => setNewListTitle(e.target.value)}
           placeholder="Enter list title"
         />
+        
+        <textarea
+          className="add-list-description" // Add a new class for styling
+          value={newListDescription}
+          onChange={(e) => setNewListDescription(e.target.value)}
+          placeholder="Enter list description"
+        />
+
         <button
           className="add-list-btn" // Apply the class for styling
           onClick={addList}

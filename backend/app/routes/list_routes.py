@@ -14,6 +14,7 @@ def get_lists():
     lists_data = [{
         "id": lst.id,
         "title": lst.title,
+        "description": lst.description,  # Include description
         "user_id": lst.user_id
     } for lst in lists]
     return jsonify(lists_data), 200
@@ -28,7 +29,10 @@ def add_list():
     if 'title' not in data:
         return jsonify({"message": "Missing required title field"}), 400
 
-    new_list = List(title=data['title'], user_id=current_user_id)
+    # Include the description in the new list creation
+    new_list = List(title=data['title'],
+                    description=data.get('description', ''),
+                    user_id=current_user_id)
     db.session.add(new_list)
     db.session.commit()
     return jsonify({"message": "List added", "list_id": new_list.id}), 201
@@ -46,6 +50,7 @@ def get_list(list_id):
     return jsonify({
         "id": lst.id,
         "title": lst.title,
+        "description": lst.description,  # Include description
         "user_id": lst.user_id
     }), 200
 
@@ -61,10 +66,13 @@ def update_list(list_id):
         return jsonify({"message": "Unauthorized to update this list"}), 403
 
     lst.title = data.get('title', lst.title)
+    # Update description
+    lst.description = data.get('description', lst.description)
     db.session.commit()
     return jsonify({
         "id": lst.id,
         "title": lst.title,
+        "description": lst.description,  # Include description
         "user_id": lst.user_id
     }), 200
 
