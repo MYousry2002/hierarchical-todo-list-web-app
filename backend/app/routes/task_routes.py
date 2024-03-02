@@ -13,8 +13,15 @@ def add_task():
     data = request.get_json()
     if 'title' not in data or 'list_id' not in data:
         return jsonify({"message": "Missing required data"}), 400
+
+    # parent_id is optional, if not provided,
+    # it means the task is not a subtask
+    parent_id = data.get('parent_id')
     new_task = Task(title=data['title'],
-                    user_id=current_user_id, list_id=data['list_id'])
+                    description=data.get('description', ''),
+                    user_id=current_user_id,
+                    list_id=data['list_id'],
+                    parent_id=parent_id)  # Notice we now include parent_id
     db.session.add(new_task)
     db.session.commit()
     return jsonify({"message": "Task added", "task_id": new_task.id}), 201
@@ -27,6 +34,16 @@ def get_task(task_id):
     task = Task.query.filter_by(
         id=task_id, user_id=current_user_id).first_or_404()
     return jsonify(task.to_dict()), 200
+
+
+@task_bp.route('/subtasks/<int:task_id>', methods=['GET'])
+@jwt_required()
+def get_subtasks(task_id):
+    current_user_id = get_jwt_identity()
+    # Fetching tasks that have current task_id as their parent_id
+    subtasks = Task.query.filter_by(
+        parent_id=task_id, user_id=current_user_id).all()
+    return jsonify([subtask.to_dict() for subtask in subtasks]), 200
 
 
 @task_bp.route('/tasks/<int:task_id>', methods=['DELETE'])
