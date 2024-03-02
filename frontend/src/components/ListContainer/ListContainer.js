@@ -52,7 +52,8 @@ function ListContainer() {
       {lists.map(list => (
         <List key={list.id} list={list} removeList={() => removeList(list.id)} />
       ))}
-      <div>
+
+      <div class="add-list-container">
         <input
           className="add-list-input" // Apply the class for styling
           type="text"
@@ -68,6 +69,7 @@ function ListContainer() {
           Add List
         </button>
       </div>
+      
     </div>
   );
 }

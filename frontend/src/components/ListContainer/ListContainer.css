@@ -17,6 +17,14 @@
     margin-bottom: 10px; /* Adjust based on footer's height */
   }
   
+
+  .add-list-container {
+    flex-shrink: 0; /* Prevent the add-list-container from shrinking */
+    display: flex;
+    align-items: center; /* Align the input and button vertically */
+    /* ... other styles ... */
+  }
+
   .add-list-input {
     padding: 5px;
     margin-right: 5px;

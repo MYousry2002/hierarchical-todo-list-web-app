@@ -22,7 +22,7 @@ body {
 #root, .app {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Align to the start of the main axis */
+  justify-content: center; /* Align to the start of the main axis */
   align-items: center; /* Center items on the cross axis */
   height: 100vh; /* Use viewport height to ensure it covers the full height of the screen */
   width: 100%;
