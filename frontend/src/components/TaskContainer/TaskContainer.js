@@ -54,7 +54,7 @@ function TaskContainer({ listId }) {
   return (
     <div className="task-container">
 
-      <h3>Tasks for List {listId}</h3>
+      {/*<h3>Tasks for List {listId}</h3>*/}
 
       {tasks.map(task => (
         <Task

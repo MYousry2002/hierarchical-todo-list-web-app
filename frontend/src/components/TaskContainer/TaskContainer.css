@@ -8,25 +8,27 @@
   .add-task-input-container {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    height: auto;
   }
   
   .add-task-input {
     flex-grow: 1; /* Take up available space */
-    margin-right: 10px; /* Space between input and button */
+    margin-right: 10px; /* Space between title input and details */
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    height: 30px;
   }
 
   .add-task-details {
     flex-grow: 1; /* Take up available space */
-    margin-top: 10px; /* Space between title input and details textarea */
+    margin-right: 10px; /* Space between details and button */
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    height: 30px;
     resize: vertical; /* Allow vertical resizing */
-    min-height: 50px; /* Minimum height for the textarea */
   }  
   
   .add-task-btn {
@@ -36,6 +38,8 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 12px;
+    height: 30px;
   }
   
   .add-task-btn:hover {
