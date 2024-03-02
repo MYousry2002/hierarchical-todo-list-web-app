@@ -1,16 +1,25 @@
 /* ListContainer.css */
 .list-container {
     display: flex;
+    flex-grow: 1; /* Takes up all available space */
     flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center; /* Center lists horizontally */
+    overflow-x: auto; /* Allows horizontal scrolling if lists exceed container width */
+    overflow-y: auto; /* Adds scroll if content is taller than available space */
+    height: 100%;
+    width: 100%;
     gap: 20px;
     justify-content: center;
     padding: 20px;
-    margin-top: 100px; /* Adjust based on your header's height */
+    max-height: calc(100vh - 80px); /* Full height minus header and footer */
+    margin-top: 70px; /* Adjust based on header's height */
+    margin-bottom: 10px;
   }
   
   .add-list-input {
-    padding: 10px;
-    margin-right: 10px;
+    padding: 5px;
+    margin-right: 5px;
     border-radius: 4px;
     border: none;
   }
@@ -18,7 +27,7 @@
   .add-list-btn {
     background-color: #008C8B; /* Lighter teal for the button */
     color: #fff;
-    padding: 10px 20px;
+    padding: 5px 10px;
     border: none;
     border-radius: 4px;
     cursor: pointer;

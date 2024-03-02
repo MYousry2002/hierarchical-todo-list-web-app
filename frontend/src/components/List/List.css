@@ -3,34 +3,40 @@
     position: relative; /* Needed to position the collapse button absolutely */
     background-color: #003B46; /* Dark teal color */
     color: #fff;
-    padding: 20px;
+    padding: 10px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 700px; /* Fixed width for each list */
-    min-height: 700px; /* Adjust the minimum height as needed */
+    width: 500px; /* Fixed width for each list */
+    height: auto; /* Adjust height automatically */
+    max-height: 100%; /* Ensure it doesn't grow beyond the container */
+    min-height: 100%; /* Adjust the minimum height as needed */
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* Distributes children with space between */
-
     overflow: hidden; /* Hide overflow content */
     transition: width 0.3s ease-out; /* Smooth transition for width property */
   }
   
   .list h2 {
-    margin-bottom: 20px;
-    margin-top: 20px;
+    position: sticky;
+    font-size: 20px;
+    top: 0; /* Adjust if necessary, based on other fixed elements */
+    /*background: inherit; /* To cover the content behind it when scrolling */
+    z-index: 2; /* Ensure it stacks above other content, except the collapse button */
+    margin-bottom: 10px;
+    margin-top: 10px;
     text-align: center;
   }
   
   .remove-list-btn {
     background-color: #C44D58; /* Red color for delete button */
     color: #fff;
-    padding: 10px;
+    padding: 4px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 5px;
   }
   
   .remove-list-btn:hover {
@@ -38,20 +44,21 @@
   }
 
   .collapsed {
-    width: 40px; /* Set a width that will only show the collapse/expand button */
+    width: 25px; /* Set a width that will only show the collapse/expand button */
+    height: 100%;
     /* Adjust padding and other properties as needed to fit the button */
   }
   
   .collapse-toggle-btn {
     position: absolute;
-    top: 10px;
-    left: -21px; /* Position the button to the top right corner of the list */
+    top: 5px;
+    left: -14px; /* Position the button to the top right corner of the list */
     transform: translateX(100%); /* Move it all the way to the right of the list's border */
-    z-index: 2; /* Ensure it's above the list content */
+    z-index: 3; /* Ensure it's above the list content */
     /* Style the button */
     background-color: #008C8B; /* Lighter teal for the button */
     color: #fff; /* White text color */
-    padding: 10px 10px; /* Padding around the text */
+    padding: 0px 5px; /* Padding around the text */
     border: none; /* No border */
     border-radius: 4px; /* Rounded corners */
     cursor: pointer; /* Pointer cursor on hover */
