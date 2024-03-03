@@ -3,31 +3,36 @@ import api from '../../services/api';
 import Task from '../Task/Task';
 import './TaskContainer.css';
 
-function TaskContainer({ listId }) {
+function TaskContainer({ listId, parentTaskId = null }) {
   
   const [tasks, setTasks] = useState([]);
   const [newTaskTitle, setNewTaskTitle] = useState('');
   const [newTaskDetails, setNewTaskDetails] = useState('');
 
-  // Memoize fetchTasks to prevent it from being recreated on every render
-  const fetchTasks = useCallback(() => {
-    api.get(`/taskscontainer/tasks/${listId}`)
-      .then(response => setTasks(response.data))
-      .catch(error => console.error("Error fetching tasks", error));
-  }, [listId]); // Only recreate fetchTasks when listId changes
-
   useEffect(() => {
-    fetchTasks();
-  }, [fetchTasks]); // fetchTasks is now stable and won't cause useEffect to re-run unnecessarily
+    // Fetch tasks or subtasks depending on whether a parentTaskId is provided
+    const endpoint = parentTaskId
+      ? `/taskscontainer/subtasks/${parentTaskId}`
+      : `/taskscontainer/tasks/by_list/${listId}`;
+    
+    api.get(endpoint)
+      .then(response => {
+        console.log("API response data:", response.data);
+        setTasks(response.data)
+      })
+      .catch(error => console.error("Error fetching tasks", error));
+  }, [listId, parentTaskId]);
 
-  const addTask = (taskTitle) => {
-    if (!newTaskTitle.trim()) return; // Prevent adding empty tasks
+  const addTask = () => {
+    if (!newTaskTitle.trim()) return;
 
     const taskData = {
       title: newTaskTitle,
       description: newTaskDetails,
-      list_id: listId
+      list_id: listId,
+      parent_id: parentTaskId
     };
+
 
     api.post('/taskscontainer/tasks', taskData)
       .then(response => {
@@ -39,29 +44,17 @@ function TaskContainer({ listId }) {
   };
 
 
-  const deleteTask = (taskId) => {
-    api.delete(`/taskscontainer/tasks/${taskId}`)
-      .then(fetchTasks) // No need to wrap fetchTasks in an anonymous function
-      .catch(error => console.error("Error deleting task", error));
-  };
-
-  const toggleTaskCompletion = (taskId, isCompleted) => {
-    api.patch(`/taskscontainer/tasks/${taskId}`, { completed: !isCompleted })
-      .then(fetchTasks) // No need to wrap fetchTasks in an anonymous function
-      .catch(error => console.error("Error updating task", error));
-  };
-
   return (
     <div className="task-container">
 
       {/*<h3>Tasks for List {listId}</h3>*/}
 
-      {tasks.map(task => (
+      {Array.isArray(tasks) && tasks.map(task => (
         <Task
           key={task.id}
           task={task}
-          deleteTask={() => deleteTask(task.id)}
-          toggleTaskCompletion={() => toggleTaskCompletion(task.id, task.completed)}
+          onAddSubtask={addTask}
+          listId={listId}
         />
       ))}
 

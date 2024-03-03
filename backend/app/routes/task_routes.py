@@ -36,6 +36,20 @@ def get_task(task_id):
     return jsonify(task.to_dict()), 200
 
 
+# route to fetch tasks by list_id
+@task_bp.route('/tasks/by_list/<int:list_id>', methods=['GET'])
+@jwt_required()
+def get_tasks_by_list(list_id):
+    current_user_id = get_jwt_identity()
+    # Fetch only top-level tasks (no parent ID) associated with
+    # the list_id and current_user_id
+    tasks = Task.query.filter_by(list_id=list_id,
+                                 user_id=current_user_id,
+                                 parent_id=None).all()
+    # Convert each task to a dictionary and return as a JSON array
+    return jsonify([task.to_dict() for task in tasks]), 200
+
+
 @task_bp.route('/subtasks/<int:task_id>', methods=['GET'])
 @jwt_required()
 def get_subtasks(task_id):
@@ -68,12 +82,3 @@ def update_task(task_id):
         task.completed = data['completed']
     db.session.commit()
     return jsonify({"message": "Task updated"}), 200
-
-
-@task_bp.route('/tasks/<int:list_id>', methods=['GET'])
-@jwt_required()
-def get_tasks_by_list(list_id):
-    current_user_id = get_jwt_identity()
-    tasks = Task.query.filter_by(
-        list_id=list_id, user_id=current_user_id).all()
-    return jsonify([task.to_dict() for task in tasks]), 200
