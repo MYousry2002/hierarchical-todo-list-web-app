@@ -52,15 +52,16 @@
 
   .collapsed-content {
     /* Hide all children except for the collapse button */
-    > :not(.collapse-toggle-btn) {
+    > :not(.collapse-toggle-btn, .collapsed-title) {
       display: none;
     }
   }
 
-  .list.collapsed h2 {
+  .collapsed-title {
     writing-mode: vertical-lr; /* Orient the text vertically */
     transform-origin: center; /* Ensure the rotation pivots around the center */
     margin: 0; /* Center the title */
+    padding: 0;
     height: 100%; /* Full height to align vertically */
     display: flex; /* Use flexbox to align */
     align-items: center; /* Align text in the center */
@@ -105,7 +106,7 @@
 }
 
 /* Apply the animation to the title on hover */
-.list.collapsed h2:hover {
+.collapsed-title:hover {
   animation: pulse 1s ease-in-out infinite;
 }
 .list h2:hover {

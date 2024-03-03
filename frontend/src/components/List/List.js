@@ -73,6 +73,10 @@ function List({ list, removeList, onDragStart, onDragOver, onDrop, index }) {
         {isCollapsed ? '>' : '<'} {/* Change icon based on state */}
       </button>
 
+      {/* Visible only when list is collapsed */}
+      {isCollapsed && <div className="collapsed-title">{list.title}</div>}
+
+
       <div className="list-header">
 
         {/* Editable list title */}
