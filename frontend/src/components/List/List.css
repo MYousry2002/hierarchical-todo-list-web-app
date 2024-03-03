@@ -60,6 +60,7 @@
   .collapsed-title {
     writing-mode: vertical-lr; /* Orient the text vertically */
     transform-origin: center; /* Ensure the rotation pivots around the center */
+    font-size: 18px;
     margin: 0; /* Center the title */
     padding: 0;
     height: 100%; /* Full height to align vertically */
