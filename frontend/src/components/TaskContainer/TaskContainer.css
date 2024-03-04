@@ -51,3 +51,7 @@
     cursor: not-allowed;
   }
   
+  
+  .subtask-container {
+    padding-left: 20px; /* Adjust as needed for indentation */
+  }

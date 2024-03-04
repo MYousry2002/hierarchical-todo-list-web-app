@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import Task from '../Task/Task';
 import './TaskContainer.css';
@@ -8,6 +8,7 @@ function TaskContainer({ listId, parentTaskId = null }) {
   const [tasks, setTasks] = useState([]);
   const [newTaskTitle, setNewTaskTitle] = useState('');
   const [newTaskDetails, setNewTaskDetails] = useState('');
+
 
   useEffect(() => {
     // Fetch tasks or subtasks depending on whether a parentTaskId is provided
@@ -22,6 +23,8 @@ function TaskContainer({ listId, parentTaskId = null }) {
       })
       .catch(error => console.error("Error fetching tasks", error));
   }, [listId, parentTaskId]);
+
+
 
   const addTask = () => {
     if (!newTaskTitle.trim()) return;
@@ -44,6 +47,27 @@ function TaskContainer({ listId, parentTaskId = null }) {
   };
 
 
+  const handleDeleteTask = (taskId) => {
+    api.delete(`/taskscontainer/tasks/${taskId}`)
+      .then(() => {
+        // If the delete was successful, filter out the task from the tasks state
+        setTasks(currentTasks => currentTasks.filter(task => task.id !== taskId));
+      })
+      .catch(error => console.error("Error deleting task", error));
+  };
+
+
+  const handleUpdateTasks = (taskId, updatedTask) => {
+    setTasks(currentTasks => currentTasks.map(task => {
+      if (task.id === taskId) {
+        // Update the task with the new data
+        return updatedTask;
+      }
+      return task;
+    }));
+  };
+
+
   return (
     <div className="task-container">
 
@@ -51,11 +75,13 @@ function TaskContainer({ listId, parentTaskId = null }) {
 
       {Array.isArray(tasks) && tasks.map(task => (
         <Task
-          key={task.id}
-          task={task}
-          onAddSubtask={addTask}
-          listId={listId}
-        />
+        key={task.id}
+        task={task}
+        onAddSubtask={addTask}
+        handleDeleteTask={handleDeleteTask}
+        onUpdateTasks={handleUpdateTasks}
+        listId={listId}
+      />
       ))}
 
       

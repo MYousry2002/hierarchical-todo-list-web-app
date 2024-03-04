@@ -71,14 +71,22 @@ def delete_task(task_id):
     return jsonify({"message": "Task deleted"}), 200
 
 
-@task_bp.route('/tasks/<int:task_id>', methods=['PATCH'])
+@task_bp.route('/tasks/<int:task_id>', methods=['PATCH', 'PUT'])
 @jwt_required()
 def update_task(task_id):
     current_user_id = get_jwt_identity()
     task = Task.query.filter_by(
         id=task_id, user_id=current_user_id).first_or_404()
+
     data = request.get_json()
+
+    # Check and update task fields with data from the request
+    if 'title' in data:
+        task.title = data['title']
+    if 'description' in data:
+        task.description = data['description']
     if 'completed' in data:
         task.completed = data['completed']
+
     db.session.commit()
-    return jsonify({"message": "Task updated"}), 200
+    return jsonify(task.to_dict()), 200
