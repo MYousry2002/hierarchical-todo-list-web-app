@@ -59,15 +59,30 @@ function Task({ task, listId, handleDeleteTask, onUpdateTasks }) {
           </>
         ) : (
           <>
-            <h3 onClick={handleComplete}>{title}</h3>
-            <p>{description}</p>
-            <button onClick={handleEdit}>Edit</button>
-            <button onClick={() => handleDeleteTask(task.id)} className="delete-task-btn">
-              Delete </button>
+            <div className="task-header" onClick={toggleCollapse}>
+
+              <h3 onClick={handleComplete}>{title}</h3>
+              
+              <div className="task-del-edit-box">
+                <button onClick={handleEdit} className='edit-task-btn'>
+                <i className="fas fa-edit"></i> {/* This is the Font Awesome edit icon */}
+                </button>
+
+                <button onClick={() => handleDeleteTask(task.id)} className="delete-task-btn">
+                  <i className="fas fa-trash"></i> {/* This is the Font Awesome Trash icon */}
+                  </button>
+              </div>
+            </div>
           </>
         )}
       </div>
-      {!isCollapsed && <TaskContainer listId={listId} parentTaskId={task.id} />}
+      {!isCollapsed && (
+        <>
+          <p className="task-description">{task.description}</p>
+          <TaskContainer listId={listId} parentTaskId={task.id} />
+        </>
+      )}
+
     </div>
   );
 }
