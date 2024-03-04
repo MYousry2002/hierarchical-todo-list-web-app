@@ -2,10 +2,11 @@
 .task {
     background-color: #005960; /* Slightly darker teal color */
     color: #fff;
-    margin: 10px 0;
+    margin-bottom: 10px;
     padding: 10px;
     border-radius: 4px;
     text-align: left; /* Align text to the left */
+    width: 100%; /* Ensure it takes the full width */
   }
   
   .task-header {
@@ -14,30 +15,35 @@
     justify-content: space-between; /* Space out title and buttons */
   }
   
+  .task-title-check{
+    display: flex; /* Use flexbox for the button container too */
+    gap: 5px; /* some space between the buttons */
+  }
+
   .task-title {
     flex: 1; /* Allows the title to grow and fill the space */
-    margin: 0; /* Adjust margins as needed */
+    margin-left: 10px;
+    cursor: pointer; /* the title to toggles collapsing  */
+    text-align: left;
     /* Additional styling for the title */
   }
 
-  .task-del-edit-box{
-    display: flex; /* Use flexbox for the button container too */
-    gap: 5px; /* If you want some space between the buttons */
-
-  }
-
+  
   .task.completed {
     background-color: #3B9778; /* Different color to indicate completion */
     text-decoration: line-through;
   }
   
-  .task h3 {
-    cursor: pointer; /* If you want the title to toggle completion */
-  }
-  
-  .task p {
-    margin-left: 0px; /* Align headers and paragraphs to the left */
+  .task-description{
+    margin-left: 0px; /* Align paragraphs to the left */
+    padding: 5px;
     font-size: 12px;
+  }
+
+  .task-del-edit-box{
+    display: flex; /* Use flexbox for the button container too */
+    gap: 5px; /* some space between the buttons */
+    margin-left: 10px;
   }
 
   .edit-task-btn {
@@ -47,8 +53,6 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-right: 4px;
-    margin-left: 10px;
   }
   
   .delete-task-btn {
@@ -61,6 +65,11 @@
     margin-right: 5px;
   }
   
+  .task-completion-checkbox{
+    background-color: #008C8B; /* Lighter teal for buttons */
+    padding: 2px;
+    margin-right: 5px;
+  }
   
   .edit-task-btn:hover,
   .delete-task-btn:hover {

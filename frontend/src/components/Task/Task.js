@@ -8,6 +8,7 @@ function Task({ task, listId, handleDeleteTask, onUpdateTasks }) {
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description);
+  const [completed, setCompleted] = useState(task.completed); // Add this line
 
 
   // functions for handleEdit, handleDelete, handleSave, etc.
@@ -31,17 +32,20 @@ function Task({ task, listId, handleDeleteTask, onUpdateTasks }) {
   };  
 
 
-  const handleComplete = () => {
-    const updatedTask = { ...task, completed: !task.completed };
-    api.patch(`/taskscontainer/tasks/${task.id}`, { completed: updatedTask.completed })
+  // Handle the checkbox change
+  const handleCheckboxChange = () => {
+    const updatedCompletionStatus = !completed;
+    setCompleted(updatedCompletionStatus); // Update state
+
+    // Update the task's completion status in the backend
+    api.patch(`/taskscontainer/tasks/${task.id}`, { completed: updatedCompletionStatus })
       .then(() => {
-        if (onUpdateTasks) {
-          onUpdateTasks(task.id, updatedTask);
-        }
+        onUpdateTasks(task.id, { ...task, completed: updatedCompletionStatus });
       })
       .catch(error => console.error("Error updating task completion", error));
   };
-  
+
+
   
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
@@ -59,19 +63,35 @@ function Task({ task, listId, handleDeleteTask, onUpdateTasks }) {
           </>
         ) : (
           <>
-            <div className="task-header" onClick={toggleCollapse}>
+            <div className="task-header">
+              <div className="task-title-check">
+                {/* Checkbox for marking task completion */}
+                <input
+                  type="checkbox"
+                  checked={completed}
+                  onChange={handleCheckboxChange}
+                  className="task-completion-checkbox"
+                />
 
-              <h3 onClick={handleComplete}>{title}</h3>
-              
+                {/* task title */}
+                <h3 onClick={toggleCollapse}>{title}</h3>
+
+              </div>
+
+
               <div className="task-del-edit-box">
+
+                {/*Button for editing the task*/}
                 <button onClick={handleEdit} className='edit-task-btn'>
                 <i className="fas fa-edit"></i> {/* This is the Font Awesome edit icon */}
                 </button>
 
+                {/*Button for deleting the task*/}
                 <button onClick={() => handleDeleteTask(task.id)} className="delete-task-btn">
                   <i className="fas fa-trash"></i> {/* This is the Font Awesome Trash icon */}
                   </button>
               </div>
+
             </div>
           </>
         )}
