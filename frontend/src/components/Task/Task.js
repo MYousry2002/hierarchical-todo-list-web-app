@@ -53,7 +53,7 @@ function Task({ task, listId, handleDeleteTask, onUpdateTasks }) {
 
   return (
     <div className={`task ${task.completed ? 'completed' : ''}`}>
-      <div onClick={toggleCollapse}>
+      <div>
         {isEditing ? (
           <>
             <input value={title} onChange={(e) => setTitle(e.target.value)} />
