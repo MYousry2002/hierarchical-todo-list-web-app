@@ -1,7 +1,7 @@
 /* TaskContainer.css */
 .task-container {
     position: relative; /* relative positioning here */
-    margin-top: 20px;
+    margin-top: 5px;
     flex-direction: column;
     justify-content: flex-start; /* Aligns children to the start */
     overflow-y: auto; /* Enables vertical scrolling if content overflows */

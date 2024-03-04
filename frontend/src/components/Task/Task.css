@@ -20,30 +20,27 @@
     gap: 5px; /* some space between the buttons */
   }
 
+  .task-completion-checkbox{
+    background-color: #008C8B; /* Lighter teal for buttons */
+    padding: 2px;
+    margin-right: 5px;
+  }
+  
   .task-title {
     flex: 1; /* Allows the title to grow and fill the space */
-    margin-left: 10px;
     cursor: pointer; /* the title to toggles collapsing  */
     text-align: left;
     /* Additional styling for the title */
   }
 
-  
   .task.completed {
     background-color: #3B9778; /* Different color to indicate completion */
     text-decoration: line-through;
-  }
-  
-  .task-description{
-    margin-left: 0px; /* Align paragraphs to the left */
-    padding: 5px;
-    font-size: 12px;
   }
 
   .task-del-edit-box{
     display: flex; /* Use flexbox for the button container too */
     gap: 5px; /* some space between the buttons */
-    margin-left: 10px;
   }
 
   .edit-task-btn {
@@ -62,17 +59,16 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-right: 5px;
-  }
-  
-  .task-completion-checkbox{
-    background-color: #008C8B; /* Lighter teal for buttons */
-    padding: 2px;
-    margin-right: 5px;
   }
   
   .edit-task-btn:hover,
   .delete-task-btn:hover {
     opacity: 0.8;
+  }
+
+  .task-description{
+    margin-left: 0px; /* Align paragraphs to the left */
+    padding: 5px;
+    font-size: 12px;
   }
   

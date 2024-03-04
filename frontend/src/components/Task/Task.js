@@ -4,11 +4,11 @@ import TaskContainer from '../TaskContainer/TaskContainer';
 import './Task.css';
 
 function Task({ task, listId, handleDeleteTask, onUpdateTasks }) {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true); // for collapsing with start value is true
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description);
-  const [completed, setCompleted] = useState(task.completed); // Add this line
+  const [completed, setCompleted] = useState(task.completed);
 
 
   // functions for handleEdit, handleDelete, handleSave, etc.
