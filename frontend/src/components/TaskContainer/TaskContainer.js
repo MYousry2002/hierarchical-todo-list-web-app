@@ -5,13 +5,13 @@ import './TaskContainer.css';
 
 function TaskContainer({ listId, parentTaskId = null }) {
   
+  
   const [tasks, setTasks] = useState([]);
   const [newTaskTitle, setNewTaskTitle] = useState('');
   const [newTaskDetails, setNewTaskDetails] = useState('');
 
 
-  useEffect(() => {
-    // Fetch tasks or subtasks depending on whether a parentTaskId is provided
+  const fetchTasks = () => {
     const endpoint = parentTaskId
       ? `/taskscontainer/subtasks/${parentTaskId}`
       : `/taskscontainer/tasks/by_list/${listId}`;
@@ -19,11 +19,16 @@ function TaskContainer({ listId, parentTaskId = null }) {
     api.get(endpoint)
       .then(response => {
         console.log("API response data:", response.data);
-        setTasks(response.data)
+        setTasks(response.data);
       })
       .catch(error => console.error("Error fetching tasks", error));
-  }, [listId, parentTaskId]);
+  };
 
+
+  // Initial fetch of tasks
+  useEffect(() => {
+    fetchTasks();
+  }, [listId, parentTaskId]);
 
 
   const addTask = () => {
@@ -39,10 +44,17 @@ function TaskContainer({ listId, parentTaskId = null }) {
 
     api.post('/taskscontainer/tasks', taskData)
       .then(response => {
-        setTasks(prevTasks => [...prevTasks, response.data]);
-        setNewTaskTitle(''); // Clear the input field after adding
-        setNewTaskDetails(''); // Clear the details input as well
-      })
+        // Ensure that the new task is added as a task and not as a subtask.
+        // The logic here assumes that tasks have no parent_id when they are not subtasks.
+        if (!parentTaskId) {
+          setTasks(prevTasks => [...prevTasks, response.data]);
+        } else {
+          // Handle subtask addition logic here
+        }
+        fetchTasks(); // Re-fetch tasks to update the list
+        setNewTaskTitle('');
+        setNewTaskDetails('');
+        })
       .catch(error => console.error("Error adding task", error));
   };
 

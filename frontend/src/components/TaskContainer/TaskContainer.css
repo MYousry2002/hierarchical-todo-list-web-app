@@ -16,7 +16,6 @@
   .add-task-input-container {
     position: sticky; /* sticky positioning */
     position: -webkit-sticky; /* For Safari */
-    top: 360px;
     bottom: 0; /* Aligns the container to the bottom */
     left: 0; /* Aligns the container to the left */
     width: 100%; /* Ensure it spans the full width */
