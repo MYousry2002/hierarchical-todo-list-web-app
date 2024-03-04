@@ -71,7 +71,7 @@ function TaskContainer({ listId, parentTaskId = null }) {
   return (
     <div className="task-container">
 
-      {/*<h3>Tasks for List {listId}</h3>*/}
+      <div className="task-list">
 
       {Array.isArray(tasks) && tasks.map(task => (
         <Task
@@ -84,6 +84,7 @@ function TaskContainer({ listId, parentTaskId = null }) {
       />
       ))}
 
+      </div>
       
       <div className="add-task-input-container">
         <input

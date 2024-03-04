@@ -20,6 +20,7 @@
   
   .list h2 {
     position: sticky;
+    position: -webkit-sticky; /* For Safari */
     font-size: 20px;
     top: 0; /* Adjust if necessary, based on other fixed elements */
     /*background: inherit; /* To cover the content behind it when scrolling */
@@ -30,6 +31,9 @@
   }
   
   .remove-list-btn {
+    position: sticky;
+    position: -webkit-sticky; /* For Safari */
+    bottom: 0;
     background-color: #C44D58; /* Red color for delete button */
     color: #fff;
     padding: 4px;
@@ -37,7 +41,7 @@
     border-radius: 4px;
     cursor: pointer;
     width: 100%;
-    margin-top: 5px;
+    margin-top: 10px;
   }
   
   .remove-list-btn:hover {
