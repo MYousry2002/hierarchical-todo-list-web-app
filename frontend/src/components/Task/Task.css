@@ -13,6 +13,7 @@
     display: flex; /* Use flexbox to align children */
     align-items: center; /* Align vertically */
     justify-content: space-between; /* Space out title and buttons */
+    font-size: 12px;
   }
   
   .task-title-check{
@@ -72,3 +73,54 @@
     font-size: 12px;
   }
   
+
+  .edit-task-box{
+    width: 100%; /* Ensure it spans the full width */
+    display: flex;
+    justify-content: space-between;
+    height: 30px;
+  }
+
+  .edit-task-input{
+    flex-grow: 1; /* Take up available space */
+    margin-right: 5px; /* Space between title input and details */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .edit-task-description{
+    flex-grow: 1; /* Take up available space */
+    margin-right: 5px; /* Space between details and button */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical; /* Allow vertical resizing */
+  }
+
+  .save-task-edit-btn{
+    flex-grow: 1;
+    background-color: #008C8B; /* Lighter teal for the button */
+    color: #fff;
+    padding: 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    text-align: center;
+    align-items: center;
+    margin-right: 5px;
+  }
+
+  .cancel-task-edit-btn{
+    flex-grow: 1;
+    background-color: #C44D58; /* Red color for cancel button */
+    color: #fff;
+    padding: 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    text-align: center;
+    align-items: center;
+  }

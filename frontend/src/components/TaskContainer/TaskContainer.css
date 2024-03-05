@@ -1,6 +1,7 @@
 /* TaskContainer.css */
 .task-container {
     position: relative; /* relative positioning here */
+    display: flex;
     margin-top: 5px;
     flex-direction: column;
     justify-content: flex-start; /* Aligns children to the start */
@@ -26,24 +27,23 @@
   
   .add-task-input {
     flex-grow: 1; /* Take up available space */
-    margin-right: 10px; /* Space between title input and details */
-    padding: 10px;
+    margin-right: 5px; /* Space between title input and details */
+    padding: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    height: 30px;
   }
 
   .add-task-details {
     flex-grow: 1; /* Take up available space */
-    margin-right: 10px; /* Space between details and button */
-    padding: 10px;
+    margin-right: 5px; /* Space between details and button */
+    padding: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    height: 30px;
     resize: vertical; /* Allow vertical resizing */
   }  
   
   .add-task-btn {
+    flex-grow: 1;
     background-color: #008C8B; /* Lighter teal for the button */
     color: #fff;
     padding: 10px;
@@ -51,7 +51,9 @@
     border-radius: 4px;
     cursor: pointer;
     font-size: 12px;
-    height: 30px;
+    text-align: center;
+    align-items: center;
+    width: 80px;
   }
   
   .add-task-btn:hover {

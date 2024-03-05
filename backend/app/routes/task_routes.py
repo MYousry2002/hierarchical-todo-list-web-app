@@ -21,7 +21,7 @@ def add_task():
                     description=data.get('description', ''),
                     user_id=current_user_id,
                     list_id=data['list_id'],
-                    parent_id=parent_id)  # Notice we now include parent_id
+                    parent_id=parent_id)
     db.session.add(new_task)
     db.session.commit()
     return jsonify({"message": "Task added", "task_id": new_task.id}), 201

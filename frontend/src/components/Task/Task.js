@@ -55,12 +55,12 @@ function Task({ task, listId, handleDeleteTask, onUpdateTasks }) {
     <div className={`task ${task.completed ? 'completed' : ''}`}>
       <div>
         {isEditing ? (
-          <>
-            <input value={title} onChange={(e) => setTitle(e.target.value)} />
-            <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
-            <button onClick={handleSave}>Save</button>
-            <button onClick={() => setIsEditing(false)}>Cancel</button>
-          </>
+          <div className='edit-task-box'>
+            <input className='edit-task-input' value={title} onChange={(e) => setTitle(e.target.value)} />
+            <textarea className='edit-task-description' value={description} onChange={(e) => setDescription(e.target.value)} />
+            <button className='save-task-edit-btn' onClick={handleSave}>Save</button>
+            <button className='cancel-task-edit-btn' onClick={() => setIsEditing(false)}>Cancel</button>
+          </div>
         ) : (
           <>
             <div className="task-header">
