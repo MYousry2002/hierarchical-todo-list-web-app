@@ -117,7 +117,7 @@ On Windows:
 ```bash
 cd backend
 python3 -m venv venv
-venv\Scripts\activate.bat
+venv\Scripts\activate
 pip3 install -r requirements.txt
 python3 app.py
 ```
