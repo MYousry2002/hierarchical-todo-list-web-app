@@ -1,3 +1,31 @@
+# Hierarchical To-Do List Web Application
+
+A comprehensive web application designed to help users manage their tasks and projects in a hierarchical structure. This application allows for the creation of tasks within tasks and enables smooth transition accross them, offering a detailed view of the structure of the work that needs to be done.
+
+## Features
+- Multiple users with user authentication (register, login, logout).
+- Create multiple lists and edit or remove them. 
+- Reorder lists ondisplay using drag and drop.
+- Create multiple tasks within a list.
+- Create subtasks within a task with unlimited depth. 
+- Edit or delete tasks or subtasks.
+- Collapse and expand lists and tasks or subtasks.
+- Mark tasks or subtasks as complete.
+- Drag and Drop functionality for tasks between lists.
+- Durable database to manage user data.
+
+## Usage: 
+
+Watch this demo (here)[] to get to know the app!
+
+
+## Application Structure
+
+### Backend
+The backend is built with Flask. It is structured to provide API endpoints for user authentication and CRUD operations for lists and tasks. It uses sqlAlchemy for the database.
+
+### Frontend
+The frontend is created using React. It is composed of several components that work together to provide a seamless and dynamic user experience.
 
 ```graphql
 hierarchical-todo-list-app/
@@ -19,7 +47,7 @@ hierarchical-todo-list-app/
 │   │   └── test_routes.py
 |   |
 │   ├── requirements.txt              # Python dependencies
-│   ├── run.py                        # Entry point to run the Flask application
+│   ├── app.py                        # Entry point to run the Flask application
 │   ├── migrations/                   # SQLAlchemy database migrations
 │   ├── instance/                     # Instance of the database
 │   └── venv/                         # Environment variables
@@ -74,3 +102,45 @@ hierarchical-todo-list-app/
 └── README.md                       # General project documentation
 
 ```
+
+## Installation
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/myousry2002/hierarchical-todo-list-app.git
+```
+
+2. Navigate to the backend directory, install dependencies, and start the server
+
+On Windows:
+```bash
+cd backend
+python3 -m venv venv
+venv\Scripts\activate.bat
+pip3 install -r requirements.txt
+python3 app.py
+```
+
+On macOS:
+```bash
+cd backend
+python3 -m venv venv
+source venv/bin/activate
+pip3 install -r requirements.txt
+python3 app.py
+```
+
+3. In a new terminal, navigate to the frontend directory, install dependencies, and start the React application:
+```bash
+cd frontend
+npm install
+npm start
+```
+
+4. Open http://localhost:3000 in your browser to view the application.
+
+
+## Contribution
+Contributions are welcome. Please fork the repository and submit a pull request with your proposed changes.
+
