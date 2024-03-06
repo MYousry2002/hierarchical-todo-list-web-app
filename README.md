@@ -16,7 +16,7 @@ A comprehensive web application designed to help users manage their tasks and pr
 
 ## Usage: 
 
-Watch this demo (here)[] to get to know the app!
+Watch this demo [here](https://www.loom.com/share/aab7966035bb48818131c9662e0505e9?sid=37c303a7-c71d-4af6-ba0b-9150af6e2dcb) to get to know the app!
 
 
 ## Application Structure
@@ -108,7 +108,7 @@ hierarchical-todo-list-app/
 1. Clone the repository
 
 ```bash
-git clone https://github.com/myousry2002/hierarchical-todo-list-app.git
+git clone https://github.com/MYousry2002/hierarchical-todo-list-web-app.git
 ```
 
 2. Navigate to the backend directory, install dependencies, and start the server
