@@ -51,8 +51,20 @@ function Task({ task, listId, handleDeleteTask, onUpdateTasks }) {
     setIsCollapsed(!isCollapsed);
   };
 
+
+  const handleDragStart = (e, task) => {
+    e.stopPropagation(); // Prevent the drag event from bubbling up to the list
+    // Use JSON.stringify to handle complex data
+    e.dataTransfer.setData("text/plain", JSON.stringify({ id: task.id, listId: listId }));
+    e.dataTransfer.effectAllowed = "move";
+  };
+
+
   return (
-    <div className={`task ${task.completed ? 'completed' : ''}`}>
+    <div className={`task ${task.completed ? 'completed' : ''}`}
+      draggable
+      onDragStart={(e) => handleDragStart(e, task)}
+    >
       <div>
         {isEditing ? (
           <div className='edit-task-box'>

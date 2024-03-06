@@ -90,3 +90,20 @@ def update_task(task_id):
 
     db.session.commit()
     return jsonify(task.to_dict()), 200
+
+
+@task_bp.route('/tasks/move/<int:task_id>', methods=['PATCH'])
+@jwt_required()
+def move_task(task_id):
+    current_user_id = get_jwt_identity()
+    task = Task.query.filter_by(id=task_id,
+                                user_id=current_user_id).first_or_404()
+    data = request.get_json()
+
+    if 'list_id' in data:
+        task.list_id = data['list_id']
+        db.session.commit()
+        return jsonify({"message": "Task moved successfully",
+                        "task": task.to_dict()}), 200
+
+    return jsonify({"message": "List ID not provided"}), 400

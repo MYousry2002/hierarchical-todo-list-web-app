@@ -10,6 +10,8 @@ function ListContainer() {
   const [newListTitle, setNewListTitle] = useState('');
   const [newListDescription, setNewListDescription] = useState(''); // for list description
   const [draggedIndex, setDraggedIndex] = useState(null); // for dragging and dropping
+  const [refreshFlag, setRefreshFlag] = useState(false); // handles when tasks should be refreshed
+
 
   useEffect(() => {
     // Fetch all lists for the user when the component mounts
@@ -78,6 +80,30 @@ function ListContainer() {
     setDraggedIndex(null);
   };
 
+  const toggleRefresh = () => setRefreshFlag(prevFlag => !prevFlag);
+  // handling moving tasks between lists
+  const handleMoveTask = (taskId, oldListId, newListId) => {
+    // Fetch tasks for both lists involved in the move to update UI without full reload
+    const updateTasksForList = (listId) => {
+      const endpoint = `/taskscontainer/tasks/by_list/${listId}`;
+      api.get(endpoint)
+        .then(response => {
+          setLists(currentLists => currentLists.map(list => {
+            if(list.id === listId) {
+              return { ...list, tasks: response.data };
+            }
+            return list;
+          }));
+        })
+        .catch(error => console.error(`Error fetching tasks for list ${listId}`, error));
+      
+    };
+
+    updateTasksForList(oldListId);
+    updateTasksForList(newListId);
+    toggleRefresh(); // This will trigger a refresh in all TaskContainers
+  };
+
 
   return (
     <div className="list-container">
@@ -85,11 +111,15 @@ function ListContainer() {
         <List
         key={list.id}
         list={list}
+        lists={lists} // Pass down all lists
         removeList={() => removeList(list.id)}
         onDragStart={onDragStart}
         onDragOver={onDragOver}
         onDrop={onDrop}
         index={index}
+        handleMoveTask={handleMoveTask} // for task movement
+        refreshFlag={refreshFlag}
+        toggleRefresh={() => setRefreshFlag(!refreshFlag)}
         />
       ))}
 

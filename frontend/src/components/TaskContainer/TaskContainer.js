@@ -3,7 +3,7 @@ import api from '../../services/api';
 import Task from '../Task/Task';
 import './TaskContainer.css';
 
-function TaskContainer({ listId, parentTaskId = null }) {
+function TaskContainer({ listId, parentTaskId = null, lists, onMoveTask, refreshFlag, toggleRefresh}) {
   
   
   const [tasks, setTasks] = useState([]);
@@ -28,7 +28,7 @@ function TaskContainer({ listId, parentTaskId = null }) {
   // Initial fetch of tasks
   useEffect(() => {
     fetchTasks();
-  }, [listId, parentTaskId]);
+  }, [listId, parentTaskId, refreshFlag]);
 
 
   const addTask = () => {
@@ -80,8 +80,33 @@ function TaskContainer({ listId, parentTaskId = null }) {
   };
 
 
+  // handle dropping the task
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const taskData = JSON.parse(e.dataTransfer.getData("text/plain"));
+    if (taskData.listId !== listId) {
+      moveTaskToList(taskData.id, listId);
+      // Add task to this list's state if it's not already present
+      // Note: This might require fetching task details or adjusting based on available data
+    }
+  };
+  
+  const moveTaskToList = (taskId, newListId) => {
+  api.patch(`/taskscontainer/tasks/move/${taskId}`, { list_id: newListId })
+    .then(() => {
+      onMoveTask(taskId, listId, newListId); // Assuming this function now also toggles the refreshFlag
+      // No need to explicitly call fetchTasks here if refreshFlag change triggers it
+    })
+    .catch(error => console.error("Error moving task", error));
+  };
+  
+  
+
   return (
-    <div className="task-container">
+    <div className="task-container" 
+      onDragOver={(e) => e.preventDefault()} // Prevent the default to allow dropping
+      onDrop={handleDrop}
+    >
 
       <div className="task-list">
 
@@ -93,6 +118,7 @@ function TaskContainer({ listId, parentTaskId = null }) {
         handleDeleteTask={handleDeleteTask}
         onUpdateTasks={handleUpdateTasks}
         listId={listId}
+        lists={lists} // Pass down the lists to Task
       />
       ))}
 

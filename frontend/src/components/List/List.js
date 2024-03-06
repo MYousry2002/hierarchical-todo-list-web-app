@@ -4,7 +4,7 @@ import TaskContainer from '../TaskContainer/TaskContainer';
 import api from '../../services/api';
 import './List.css';
 
-function List({ list, removeList, onDragStart, onDragOver, onDrop, index }) {
+function List({ list, removeList, onDragStart, onDragOver, onDrop, index, lists, handleMoveTask, refreshFlag, toggleRefresh}) {
 
   // list title updating
   const [isEditingTitle, setIsEditingTitle] = useState(false);
@@ -110,7 +110,8 @@ function List({ list, removeList, onDragStart, onDragOver, onDrop, index }) {
 
 
       {/* TaskContainer will manage tasks for this specific list */}
-      <TaskContainer listId={list.id} />
+      <TaskContainer listId={list.id}  lists={lists} onMoveTask={handleMoveTask} refreshFlag={refreshFlag}
+      toggleRefresh={toggleRefresh}/>
 
       {/* Button to remove this list */}
       <button onClick={() => removeList(list.id)} className="remove-list-btn">
