@@ -1,33 +1,33 @@
 /* App.css */
 
-/* Reset default browser styles */
+/* Reset default browser styles for all elements */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  margin: 0; /* Remove default margins */
+  padding: 0; /* Remove default padding */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
 
+/* Set the width and height of the html and body elements to cover the full viewport */
 html, body {
   width: 100%;
   height: 100%;
-  margin: 0;
-  padding: 0;
+  margin: 0; /* Remove default margins */
+  padding: 0; /* Remove default padding */
 }
 
+/* Set the default font and background color for the body element */
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #00A3A9; /* Set the background color for the whole app */
+  font-family: 'Arial', sans-serif; /* Set the default font to Arial */
+  background-color: #00A3A9; /* Set the background color to a specific shade of blue */
 }
 
+/* Set the layout properties for the root and app elements */
 #root, .app {
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Align to the start of the main axis */
-  align-items: center; /* Center items on the cross axis */
-  height: 100vh; /* Use viewport height to ensure it covers the full height of the screen */
-  width: 100%;
-  text-align: center;
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack child elements vertically */
+  justify-content: center; /* Center child elements vertically in the container */
+  align-items: center; /* Center child elements horizontally in the container */
+  height: 100vh; /* Set the height to cover the full viewport height */
+  width: 100%; /* Set the width to cover the full viewport width */
+  text-align: center; /* Center the text within these elements */
 }
-
-
-/* Additional styling for your app, if any */
