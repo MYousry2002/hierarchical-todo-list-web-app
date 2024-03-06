@@ -1,39 +1,41 @@
-// src/components/Register/Register.js
-import React, { useState } from 'react';
-import api from '../../../services/api';
-import './Register.css';
+// Import necessary modules and components
+import React, { useState } from 'react'; // Import React and the useState hook
+import api from '../../../services/api'; // Import the API service
+import './Register.css'; // Import the CSS for this component
 
+// Define the Register component
 function Register({ onRegisterSuccess, onPromptLogin}) {
+  // Define state variables for the username and password
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  // Define a function for handling the registration process
   const handleRegister = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent the default form submission behavior
     try {
+      // Send a POST request to the register endpoint with the username and password
       const response = await api.post('/auth/register', { username, password });
+      // Alert the user that the registration was successful
       alert('Registration successful!');
-      console.log(response.data); // Log the response data from the server
-      //onRegisterSuccess(); // Navigate to auto-login
-      onPromptLogin() // navigate to login
+      // Log the response data from the server
+      console.log(response.data);
+      // Call the onPromptLogin function to navigate to the login page
+      onPromptLogin();
     } catch (error) {
       // Log the error to the console for debugging
       console.error('Registration error:', error.response);
-      
-      // Display a more detailed error message
+      // Handle different types of errors and display appropriate error messages
       if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
         alert(`Registration failed! Response error: ${error.response.data.message}`);
       } else if (error.request) {
-        // The request was made but no response was received
         alert('Registration failed! Request error. No response from the server. Please try again later.');
       } else {
-        // Something happened in setting up the request that triggered an Error
         alert('Error in registration. Please try again.');
       }
     }
   };
 
+  // Render the component
   return (
     <div className="register-container">
       <h2>Register</h2>
@@ -44,12 +46,11 @@ function Register({ onRegisterSuccess, onPromptLogin}) {
       </form>
       <div className="register-prompt">
         Already have an account? 
-        <button onClick={onPromptLogin} className="prompt-button">
-          Log in
-        </button>
+        <button onClick={onPromptLogin} className="prompt-button">Log in</button>
       </div>
     </div>
   );
 }
 
+// Export the Register component as the default export
 export default Register;

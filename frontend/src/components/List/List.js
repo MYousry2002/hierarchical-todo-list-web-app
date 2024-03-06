@@ -1,15 +1,16 @@
-// List.js
-import React, { useState } from 'react';
-import TaskContainer from '../TaskContainer/TaskContainer';
-import api from '../../services/api';
-import './List.css';
+// Import necessary modules and components
+import React, { useState } from 'react'; // Import React and the useState hook
+import TaskContainer from '../TaskContainer/TaskContainer'; // Import the TaskContainer component
+import api from '../../services/api'; // Import the API service
+import './List.css'; // Import the CSS for this component
 
+// Define the List component
 function List({ list, removeList, onDragStart, onDragOver, onDrop, index, lists, handleMoveTask, refreshFlag, toggleRefresh}) {
-
-  // list title updating
+  // Define state variables for editing the list title
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [editedTitle, setEditedTitle] = useState(list.title);
-  
+
+  // Define a function for saving the list title
   const saveTitle = (e) => {
     e.preventDefault();
     if (!editedTitle.trim()) {
@@ -28,10 +29,11 @@ function List({ list, removeList, onDragStart, onDragOver, onDrop, index, lists,
       .catch(error => console.error("Error updating title", error));
   };
 
-  // list description updating
+  // Define state variables for editing the list description
   const [isEditingDescription, setIsEditingDescription] = useState(false);
-  const [editedDescription, setEditedDescription] = useState(list.description || '');;
+  const [editedDescription, setEditedDescription] = useState(list.description || '');
 
+  // Define a function for saving the list description
   const saveDescription = (e) => {
     e.preventDefault();
     // Call the API to update the list description
@@ -44,23 +46,23 @@ function List({ list, removeList, onDragStart, onDragOver, onDrop, index, lists,
       .catch(error => console.error("Error updating description", error));
   };
 
-  // collapsing the list
+  // Define state variable for collapsing the list
   const [isCollapsed, setIsCollapsed] = useState(false);
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
   };
 
-  // dragging and moving the list
+  // Define a function for starting the drag operation
   const dragStart = (e) => {
     onDragStart(e, index);
   };
-
 
   // Only render if `list` prop is defined
   if (!list) {
     return null; // or loading indicator
   }
 
+  // Render the component
   return (
     <div className={`list ${isCollapsed ? 'collapsed collapsed-content' : ''}`}
     draggable
@@ -76,7 +78,6 @@ function List({ list, removeList, onDragStart, onDragOver, onDrop, index, lists,
       {/* Visible only when list is collapsed */}
       {isCollapsed && <div className="collapsed-title">{list.title}</div>}
 
-
       <div className="list-header">
 
         {/* Editable list title */}
@@ -90,7 +91,6 @@ function List({ list, removeList, onDragStart, onDragOver, onDrop, index, lists,
         ) : (
           <h2 onDoubleClick={() => setIsEditingTitle(true)}>{list.title}</h2>
         )}
-
 
         {/* Editable list description */}
         {isEditingDescription ? (
@@ -108,7 +108,6 @@ function List({ list, removeList, onDragStart, onDragOver, onDrop, index, lists,
         )}
       </div>
 
-
       {/* TaskContainer will manage tasks for this specific list */}
       <TaskContainer listId={list.id}  lists={lists} onMoveTask={handleMoveTask} refreshFlag={refreshFlag}
       toggleRefresh={toggleRefresh}/>
@@ -122,4 +121,5 @@ function List({ list, removeList, onDragStart, onDragOver, onDrop, index, lists,
   );
 }
 
+// Export the List component as the default export
 export default List;
