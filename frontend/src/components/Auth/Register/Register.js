@@ -13,7 +13,8 @@ function Register({ onRegisterSuccess, onPromptLogin}) {
       const response = await api.post('/auth/register', { username, password });
       alert('Registration successful!');
       console.log(response.data); // Log the response data from the server
-      onRegisterSuccess(); // Navigate to login or auto-login
+      //onRegisterSuccess(); // Navigate to auto-login
+      onPromptLogin() // navigate to login
     } catch (error) {
       // Log the error to the console for debugging
       console.error('Registration error:', error.response);

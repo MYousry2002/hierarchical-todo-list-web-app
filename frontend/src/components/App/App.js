@@ -50,7 +50,7 @@ function App() {
 
         <>
           {showRegister ? (
-            <Register onRegisterSuccess={handleAuthSuccess} onPromptLogin={promptLogin} />
+            <Register onPromptLogin={promptLogin} /> // onRegisterSuccess={handleAuthSuccess}
           ) : (
             <Login onLoginSuccess={handleAuthSuccess} onPromptRegister={promptRegister} />
           )}
