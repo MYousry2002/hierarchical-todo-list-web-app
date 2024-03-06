@@ -16,7 +16,7 @@ function ListContainer() {
   useEffect(() => {
     // Fetch all lists for the user when the component mounts
     fetchLists();
-  }, []);
+  }, [refreshFlag]);
 
   const fetchLists = () => {
 
@@ -45,8 +45,11 @@ function ListContainer() {
         setLists(prevLists => [...prevLists, response.data]);
         setNewListTitle(''); // Clear the input field after adding
         setNewListDescription(''); // Clear the description field after adding
+        toggleRefresh(); 
       })
       .catch(error => console.error("Error adding list", error));
+  
+    toggleRefresh();
   };
 
   const removeList = (listId) => {
@@ -82,7 +85,7 @@ function ListContainer() {
 
   const toggleRefresh = () => setRefreshFlag(prevFlag => !prevFlag);
   // handling moving tasks between lists
-  const handleMoveTask = (taskId, oldListId, newListId) => {
+  const handleMoveTask = (oldListId, newListId) => {
     // Fetch tasks for both lists involved in the move to update UI without full reload
     const updateTasksForList = (listId) => {
       const endpoint = `/taskscontainer/tasks/by_list/${listId}`;
